@@ -2,7 +2,7 @@
 
 namespace GoTask.Domain.Entities;
 
-public record User()
+public record User
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -13,7 +13,8 @@ public record User()
     public OrganizationRole Role { get; set; } = OrganizationRole.MEMBER;
     
     public Guid OrganizationId { get; set; }
+    public Organization Organization { get; set; } = default!;
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; }
 }
