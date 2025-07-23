@@ -2,10 +2,7 @@
 
 namespace GoTask.Infrastructure.DataAccess;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork(GoTaskDbContext dbContext) : IUnitOfWork
 {
-    public Task Commit()
-    {
-        throw new NotImplementedException();
-    }
+    public async Task Commit() => await dbContext.SaveChangesAsync();
 }
