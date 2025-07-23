@@ -28,4 +28,8 @@
       <Folder Include="Endpoints\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\GoTask.Infrastructure\GoTask.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>

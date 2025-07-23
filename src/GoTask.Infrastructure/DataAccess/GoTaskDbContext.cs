@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoTask.Infrastructure.DataAccess;
 
-public class GoTaskDbContext(DbContextOptions options ) : DbContext(options)
+public class GoTaskDbContext(DbContextOptions options) : DbContext(options)
 {
    public DbSet<TaskEntity> Tasks { get; init; }
    public DbSet<Comment> Comments { get; init; }

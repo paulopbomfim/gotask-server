@@ -8,7 +8,6 @@ public record TaskEntity
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public TaskStatusEnum Status { get; set; } = TaskStatusEnum.TODO;
-    public Guid TaskId { get; set; } = Guid.NewGuid();
     
     public long UserId { get; set; }
     public User User { get; set; } = default!;
