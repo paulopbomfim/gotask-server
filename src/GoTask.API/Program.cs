@@ -1,3 +1,4 @@
+using Carter;
 using GoTask.Infrastructure.Extensions;
 using GoTask.Infrastructure.Migrations;
 using Scalar.AspNetCore;
@@ -7,9 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddCarter();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.MapCarter();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

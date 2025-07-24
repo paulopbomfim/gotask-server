@@ -9,7 +9,7 @@ public record User
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
     public string ImageReference { get; set; } = string.Empty;
-    public OrganizationRole Role { get; set; } = OrganizationRole.MEMBER;
+    public OrganizationRole Role { get; set; } = OrganizationRole.Member;
     
     public Guid UserIdentifier { get; set; } = Guid.NewGuid();
     

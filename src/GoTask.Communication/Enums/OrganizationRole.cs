@@ -1,4 +1,4 @@
-﻿namespace GoTask.Domain.Enums;
+﻿namespace GoTask.Communication.Enums;
 
 public enum OrganizationRole
 {
