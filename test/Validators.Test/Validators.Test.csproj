@@ -18,4 +18,9 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\GoTask.Application\GoTask.Application.csproj" />
+      <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />
+    </ItemGroup>
+
 </Project>

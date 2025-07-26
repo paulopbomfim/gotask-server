@@ -27,4 +27,19 @@
     <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
         <value>Esse e-mail já está sendo utilizado</value>
     </data>
+    <data name="NAME_EMPTY" xml:space="preserve">
+        <value>Campo nome não pode estar vazio</value>
+    </data>
+    <data name="EMAIL_INVALID" xml:space="preserve">
+        <value>Formato de e-mail inválido</value>
+    </data>
+    <data name="EMAIL_EMPTY" xml:space="preserve">
+        <value>Campo e-mail não pode estar vazio</value>
+    </data>
+    <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+        <value>E-mail ou senha inválidos</value>
+    </data>
+    <data name="ROLE_MUST_BE_TYPE" xml:space="preserve">
+        <value>O cargo precisa ser admin ou member</value>
+    </data>
 </root>
