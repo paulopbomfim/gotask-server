@@ -4,6 +4,7 @@ using GoTask.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoTask.Infrastructure.Migrations
 {
     [DbContext(typeof(GoTaskDbContext))]
-    partial class GoTaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250725235541_TurnUserOrganizationIdNullable")]
+    partial class TurnUserOrganizationIdNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

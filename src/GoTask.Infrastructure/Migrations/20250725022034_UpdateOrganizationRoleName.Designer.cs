@@ -4,6 +4,7 @@ using GoTask.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoTask.Infrastructure.Migrations
 {
     [DbContext(typeof(GoTaskDbContext))]
-    partial class GoTaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250725022034_UpdateOrganizationRoleName")]
+    partial class UpdateOrganizationRoleName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,7 +138,7 @@ namespace GoTask.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("OrganizationId")
+                    b.Property<long>("OrganizationId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Password")
@@ -145,7 +148,7 @@ namespace GoTask.Infrastructure.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<Guid>("UserIdentifier")
@@ -184,7 +187,9 @@ namespace GoTask.Infrastructure.Migrations
                 {
                     b.HasOne("GoTask.Domain.Entities.Organization", "Organization")
                         .WithMany()
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Organization");
                 });

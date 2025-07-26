@@ -1,4 +1,9 @@
 ﻿using Carter;
+using GoTask.Application.UseCases.User.Register;
+using GoTask.Communication.Requests;
+using GoTask.Communication.Responses;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GoTask.API.Endpoints;
 
@@ -17,7 +22,7 @@ public class UserEndpoints: ICarterModule
     /// </summary>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public static Task<IResult> GetUsersListEndpoint()
+    private static Task<IResult> GetUsersListEndpoint()
     {
         throw new NotImplementedException();
     }
@@ -25,8 +30,10 @@ public class UserEndpoints: ICarterModule
     /// <summary>
     /// Endpoint para criação de um usuário.
     /// </summary>
-    public static Task<IResult> CreateUserEndpoint()
+    private static async Task<Created<RegisterUserResponse>> CreateUserEndpoint([FromBody] UserRequest request, IRegisterUserUseCase useCase)
     {
-        throw new NotImplementedException();
+        var response = await useCase.Execute(request);
+
+        return TypedResults.Created($"/api/user/{response.userId}", response.userInfo);
     }
 }

@@ -1,4 +1,6 @@
-﻿using GoTask.Infrastructure.DataAccess;
+﻿using GoTask.Domain.Interfaces.Repositories;
+using GoTask.Infrastructure.DataAccess;
+using GoTask.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +11,7 @@ public static class DependencyInjectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        AddRepositories(services);
 
         if (!configuration.IsTestEnvironment())
             AddDbContext(services, configuration);
@@ -22,5 +25,17 @@ public static class DependencyInjectionExtension
         
         services.AddDbContext<GoTaskDbContext>(config => 
             config.UseMySql(connectionString, serverVersion));
+    }
+
+    private static void AddRepositories(IServiceCollection services)
+    {
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
+        #region User
+
+            services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+
+        #endregion
     }
 }
