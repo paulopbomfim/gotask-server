@@ -5,7 +5,7 @@ using GoTask.Domain.Entities;
 namespace GoTask.Application.Mapping;
 
 [Mapper(EnumNamingStrategy = EnumNamingStrategy.MemberName)]
-public partial class UserMappingProfile
+public static partial class UserMappingProfile
 {
-    public partial User ToEntity(UserRequest request);
+    public static partial User ToEntity(this UserRequest request);
 }

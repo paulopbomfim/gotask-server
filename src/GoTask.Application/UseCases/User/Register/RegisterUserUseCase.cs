@@ -21,7 +21,7 @@ public class RegisterUserUseCase(
     {
         await Validate(request);
         
-        var user = new UserMappingProfile().ToEntity(request);
+        var user = request.ToEntity();
         user.Password = passwordEncrypter.Encrypt(request.Password);
 
         var registeredUser = await userWriteOnlyRepository.RegisterUser(user);
