@@ -1,8 +1,8 @@
 using Carter;
 using GoTask.API.Handlers;
+using GoTask.Application;
 using GoTask.Infrastructure.Extensions;
 using GoTask.Infrastructure.Migrations;
-using GoTask.Application;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);

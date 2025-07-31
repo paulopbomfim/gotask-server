@@ -13,6 +13,13 @@ public class UserRepository(GoTaskDbContext dbContext) : IUserReadOnlyRepository
             return await dbContext.Users.AsNoTracking()
                 .AnyAsync(user => user.Email.Equals(email));
         }
+        
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            return await dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Email.Equals(email));
+        }
 
     #endregion
 

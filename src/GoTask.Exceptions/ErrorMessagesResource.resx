@@ -42,4 +42,7 @@
     <data name="ROLE_MUST_BE_TYPE" xml:space="preserve">
         <value>O cargo precisa ser admin ou member</value>
     </data>
+    <data name="PASSWORD_EMPTY" xml:space="preserve">
+        <value>Campo de senha não pode estar vazio</value>
+    </data>
 </root>

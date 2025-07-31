@@ -18,7 +18,7 @@ services:
     - "--mode=server"
     - "--frontend-port=57000"
     - "--backend-port=57200"
-    - "--roslyn-worker-port=57401"
+    - "--roslyn-worker-port=57402"
     - "--timeout=60"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
@@ -26,9 +26,9 @@ services:
       RESHARPER_LOG_CONF: "/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
     image: "gotask.api:dev"
     ports:
-    - "127.0.0.1:57001:57000"
-    - "127.0.0.1:57201:57200"
-    - "127.0.0.1:57401:57401"
+    - "127.0.0.1:57002:57000"
+    - "127.0.0.1:57202:57200"
+    - "127.0.0.1:57402:57402"
     volumes:
     - "C:\\Users\\phpb2\\Dev\\Rocketseat\\GoTask App\\Back\\GoTask\\src\\GoTask.API:/app:rw"
     - "C:\\Users\\phpb2\\Dev\\Rocketseat\\GoTask App\\Back\\GoTask:/src:rw"
@@ -37,5 +37,5 @@ services:
       LinuxMusl64:/opt/JetBrains/RiderDebuggerTools"
     - "C:\\Users\\phpb2\\AppData\\Local\\Programs\\Rider\\bin\\backend-log.xml:/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
     - "C:\\Users\\phpb2\\AppData\\Local\\JetBrains\\Rider2025.1\\log\\DebuggerWorker\\\
-      JetBrains.Debugger.Worker.2025_7_26_16_11_56:/var/opt/JetBrains/RiderDebuggerTools:rw"
+      JetBrains.Debugger.Worker.2025_7_30_23_51_51:/var/opt/JetBrains/RiderDebuggerTools:rw"
     working_dir: "/app"

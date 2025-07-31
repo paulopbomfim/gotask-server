@@ -114,6 +114,15 @@ namespace GoTask.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campo de senha não pode estar vazio.
+        /// </summary>
+        public static string PASSWORD_EMPTY {
+            get {
+                return ResourceManager.GetString("PASSWORD_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O cargo precisa ser admin ou member.
         /// </summary>
         public static string ROLE_MUST_BE_TYPE {

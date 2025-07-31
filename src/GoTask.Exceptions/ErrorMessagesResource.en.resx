@@ -35,4 +35,7 @@
     <data name="ROLE_MUST_BE_TYPE" xml:space="preserve">
         <value>The role must be admin or member</value>
     </data>
+    <data name="PASSWORD_EMPTY" xml:space="preserve">
+        <value>Password field can't be empty</value>
+    </data>
 </root>
