@@ -9,7 +9,7 @@ public static class GetUserEndpoint
 {
     public static void AddRoute(RouteGroupBuilder group)
     {
-        group.MapPost("{userIdentifier:guid}", GetUserEndpointAsync)
+        group.MapGet("{userIdentifier:guid}", GetUserEndpointAsync)
             .WithName("Get user endpoint")
             .WithSummary("Endpoint para retornar o usuário definido.")
             .Produces<UserResponse>()
