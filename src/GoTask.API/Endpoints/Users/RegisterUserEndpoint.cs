@@ -1,4 +1,4 @@
-﻿using GoTask.Application.UseCases.User.Register;
+﻿using GoTask.Application.UseCases.User;
 using GoTask.Communication.Requests;
 using GoTask.Communication.Responses;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -13,9 +13,10 @@ public static class RegisterUserEndpoint
     public static void AddRoute(RouteGroupBuilder group)
     {
         
-        group.MapPost("", CreateUserEndpoint)
+        group.MapPost("", RegisterUserEndpointAsync)
+            .AllowAnonymous()
+            .WithName("Create user endpoint")
             .WithSummary("Endpoint para criação de um usuário.")
-            .WithName("CreateUserEndpoint")
             .Accepts<UserRequest>("application/json")
             .Produces<Created<RegisterUserResponse>>()
             .Produces<ErrorResponse>(
@@ -24,9 +25,12 @@ public static class RegisterUserEndpoint
 
     }
     
-    private static async Task<Created<RegisterUserResponse>> CreateUserEndpoint(UserRequest request, IRegisterUserUseCase useCase)
+    private static async Task<Created<RegisterUserResponse>> RegisterUserEndpointAsync(
+        UserRequest request,
+        IRegisterUserUseCase useCase,
+        CancellationToken cancellationToken)
     {
-        var response = await useCase.Execute(request);
+        var response = await useCase.ExecuteAsync(request, cancellationToken);
 
         return TypedResults.Created($"/api/user/{response.userId}", response.userInfo);
     }

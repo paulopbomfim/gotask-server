@@ -114,6 +114,15 @@ namespace GoTask.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O item solicitado não foi encontrado no sistema..
+        /// </summary>
+        public static string NOT_FOUND_ERROR {
+            get {
+                return ResourceManager.GetString("NOT_FOUND_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Campo de senha não pode estar vazio.
         /// </summary>
         public static string PASSWORD_EMPTY {

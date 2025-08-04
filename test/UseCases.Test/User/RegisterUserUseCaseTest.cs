@@ -2,7 +2,7 @@
 using CommonTestUtilities.Repositories.User;
 using CommonTestUtilities.Request;
 using CommonTestUtilities.Security;
-using GoTask.Application.UseCases.User.Register;
+using GoTask.Application.UseCases.User;
 using GoTask.Exceptions;
 using GoTask.Exceptions.ExceptionBase;
 
@@ -18,7 +18,7 @@ public class RegisterUserUseCaseTest
         var useCase = CreateUseCase();
 
         //Act
-        var result = await useCase.Execute(request);
+        var result = await useCase.ExecuteAsync(request, CancellationToken.None);
 
         //Assert
         Assert.NotNull(result.userInfo);
@@ -35,7 +35,7 @@ public class RegisterUserUseCaseTest
         var useCase = CreateUseCase(request.Email);
 
         //Act & Assert
-        var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(async () => await useCase.Execute(request));
+        var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(async () => await useCase.ExecuteAsync(request, CancellationToken.None));
         Assert.Single(exception.GetErrors());
         Assert.Equal(exception.GetErrors()[0], ErrorMessagesResource.EMAIL_ALREADY_REGISTERED);
     }

@@ -4,7 +4,9 @@ namespace GoTask.Domain.Interfaces.Repositories;
 
 public interface IUserReadOnlyRepository
 {
-    public Task<bool> ExistsActiveUserWithEmail(string email);
+    public Task<bool> ExistsActiveUserWithEmailAsync(string email, CancellationToken cancellationToken = default);
     
-    public Task<User?> GetUserByEmail(string email);
+    public Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken = default);
+    
+    public Task<User?> GetUserByIdentifierAsync(Guid userIdentifier, CancellationToken cancellationToken = default);
 }

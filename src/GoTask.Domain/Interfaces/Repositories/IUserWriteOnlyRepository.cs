@@ -4,5 +4,5 @@ namespace GoTask.Domain.Interfaces.Repositories;
 
 public interface IUserWriteOnlyRepository
 {
-    Task<User> RegisterUser(User user);
+    Task<User> RegisterUserAsync(User user, CancellationToken cancellationToken = default);
 }

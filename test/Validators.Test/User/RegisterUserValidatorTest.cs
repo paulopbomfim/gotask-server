@@ -1,6 +1,5 @@
 ﻿using CommonTestUtilities.Request;
-using GoTask.Application.UseCases.User.Register;
-using GoTask.Communication.Requests;
+using GoTask.Application.UseCases.User;
 using GoTask.Exceptions;
 
 namespace Validators.Test.User;

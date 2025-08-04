@@ -38,4 +38,7 @@
     <data name="PASSWORD_EMPTY" xml:space="preserve">
         <value>Password field can't be empty</value>
     </data>
+    <data name="NOT_FOUND_ERROR" xml:space="preserve">
+        <value>The requested item was not found in the system.</value>
+    </data>
 </root>

@@ -2,7 +2,7 @@
 using GoTask.Communication.Requests;
 using GoTask.Exceptions;
 
-namespace GoTask.Application.UseCases.User.Register;
+namespace GoTask.Application.UseCases.User;
 
 public class RegisterUserValidator : AbstractValidator<UserRequest>
 {

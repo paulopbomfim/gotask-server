@@ -7,7 +7,7 @@ using GoTask.Domain.Interfaces.Security;
 using GoTask.Exceptions;
 using GoTask.Exceptions.ExceptionBase;
 
-namespace GoTask.Application.UseCases.User.Register;
+namespace GoTask.Application.UseCases.User;
 
 public class RegisterUserUseCase(
     IUserReadOnlyRepository userReadOnlyRepository,
@@ -17,14 +17,14 @@ public class RegisterUserUseCase(
     IUnitOfWork uow
     ) : IRegisterUserUseCase
 {
-    public async Task<(long userId, RegisterUserResponse userInfo)> Execute(UserRequest request)
+    public async Task<(long userId, RegisterUserResponse userInfo)> ExecuteAsync(UserRequest request, CancellationToken cancellationToken)
     {
-        await Validate(request);
+        await ValidateAsync(request, cancellationToken);
         
         var user = request.ToEntity();
         user.Password = passwordEncrypter.Encrypt(request.Password);
 
-        var registeredUser = await userWriteOnlyRepository.RegisterUser(user);
+        var registeredUser = await userWriteOnlyRepository.RegisterUserAsync(user, cancellationToken);
         await uow.Commit();
         
         var response = new RegisterUserResponse
@@ -36,11 +36,11 @@ public class RegisterUserUseCase(
         return (registeredUser.Id, response);
     }
 
-    private async Task Validate(UserRequest request)
+    private async Task ValidateAsync(UserRequest request, CancellationToken cancellationToken)
     {
-        var validation = await new RegisterUserValidator().ValidateAsync(request);
+        var validation = await new RegisterUserValidator().ValidateAsync(request, cancellationToken);
         
-        var activeEmailExists = await userReadOnlyRepository.ExistsActiveUserWithEmail(request.Email);
+        var activeEmailExists = await userReadOnlyRepository.ExistsActiveUserWithEmailAsync(request.Email, cancellationToken);
 
         if (activeEmailExists)
         {

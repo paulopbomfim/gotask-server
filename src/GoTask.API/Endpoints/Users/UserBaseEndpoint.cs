@@ -12,5 +12,6 @@ public class UserBaseEndpoint : ICarterModule
         var userGroup = app.MapGroup("/api/user");
         
         RegisterUserEndpoint.AddRoute(userGroup);
+        GetUserEndpoint.AddRoute(userGroup);
     }
 }

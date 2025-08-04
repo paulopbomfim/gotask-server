@@ -11,8 +11,8 @@ public class UserWriteOnlyRepositoryBuilder
     public void RegisterUser()
     {
         _repository
-            .Setup(x => x.RegisterUser(It.IsAny<GoTask.Domain.Entities.User>()))
-            .ReturnsAsync((GoTask.Domain.Entities.User user) => user);
+            .Setup(x => x.RegisterUserAsync(It.IsAny<GoTask.Domain.Entities.User>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync((GoTask.Domain.Entities.User user, CancellationToken cancellationToken) => user);
     }
     
     public IUserWriteOnlyRepository Build() => _repository.Object;

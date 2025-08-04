@@ -45,4 +45,7 @@
     <data name="PASSWORD_EMPTY" xml:space="preserve">
         <value>Campo de senha não pode estar vazio</value>
     </data>
+    <data name="NOT_FOUND_ERROR" xml:space="preserve">
+        <value>O item solicitado não foi encontrado no sistema.</value>
+    </data>
 </root>

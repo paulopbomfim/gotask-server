@@ -5,5 +5,5 @@ namespace GoTask.Application.UseCases.Login;
 
 public interface ILoginUseCase
 {
-    Task<RegisterUserResponse> Execute(LoginRequest request);
+    Task<RegisterUserResponse> ExecuteAsync(LoginRequest request, CancellationToken cancellationToken);
 }

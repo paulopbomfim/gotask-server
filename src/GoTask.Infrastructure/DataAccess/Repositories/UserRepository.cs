@@ -8,26 +8,33 @@ public class UserRepository(GoTaskDbContext dbContext) : IUserReadOnlyRepository
 {
     #region Read
     
-        public async Task<bool> ExistsActiveUserWithEmail(string email)
+        public async Task<bool> ExistsActiveUserWithEmailAsync(string email, CancellationToken cancellationToken = default)
         {
             return await dbContext.Users.AsNoTracking()
-                .AnyAsync(user => user.Email.Equals(email));
+                .AnyAsync(user => user.Email.Equals(email), cancellationToken);
         }
         
-        public async Task<User?> GetUserByEmail(string email)
+        public async Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken = default)
         {
             return await dbContext.Users
                 .AsNoTracking()
-                .FirstOrDefaultAsync(user => user.Email.Equals(email));
+                .FirstOrDefaultAsync(user => user.Email.Equals(email), cancellationToken);
+        }
+
+        public async Task<User?> GetUserByIdentifierAsync(Guid userIdentifier, CancellationToken cancellationToken = default)
+        {
+            return await dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.UserIdentifier == userIdentifier, cancellationToken);
         }
 
     #endregion
 
     #region Write
 
-        public async Task<User> RegisterUser(User user)
+        public async Task<User> RegisterUserAsync(User user, CancellationToken cancellationToken = default)
         {
-            var result = await dbContext.Users.AddAsync(user);
+            var result = await dbContext.Users.AddAsync(user, cancellationToken);
             return result.Entity;
         }
 

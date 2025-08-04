@@ -11,6 +11,7 @@ public class LoginEndpoint : ICarterModule
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/api/login", Login)
+            .AllowAnonymous()
             .WithSummary("Login da aplicação")
             .Accepts<LoginRequest>("application/json")
             .Produces<Ok<RegisterUserResponse>>()
@@ -22,9 +23,12 @@ public class LoginEndpoint : ICarterModule
                 "application/problem+json");
     }
 
-    private static async Task<Ok<RegisterUserResponse>> Login(LoginRequest request, ILoginUseCase useCase)
+    private static async Task<Ok<RegisterUserResponse>> Login(
+        LoginRequest request,
+        ILoginUseCase useCase,
+        CancellationToken cancellationToken)
     {
-        var response = await useCase.Execute(request);
+        var response = await useCase.ExecuteAsync(request, cancellationToken);
         
         return TypedResults.Ok(response);
     }

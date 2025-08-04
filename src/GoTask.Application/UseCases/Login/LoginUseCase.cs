@@ -11,11 +11,11 @@ public class LoginUseCase(
     IPasswordEncrypter passwordEncrypter,
     IAccessTokenGenerator accessTokenGenerator) : ILoginUseCase
 {
-    public async Task<RegisterUserResponse> Execute(LoginRequest request)
+    public async Task<RegisterUserResponse> ExecuteAsync(LoginRequest request, CancellationToken cancellationToken)
     {
         Validate(request);
 
-        var user = await repository.GetUserByEmail(request.Email) 
+        var user = await repository.GetUserByEmailAsync(request.Email, cancellationToken) 
                    ?? throw new InvalidLoginException();
         
         var passwordValid = passwordEncrypter.Verify(request.Password, user.Password);
