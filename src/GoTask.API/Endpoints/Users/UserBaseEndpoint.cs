@@ -13,5 +13,6 @@ public class UserBaseEndpoint : ICarterModule
         
         RegisterUserEndpoint.AddRoute(userGroup);
         GetUserEndpoint.AddRoute(userGroup);
+        UpdateUserEndpoint.AddRoute(userGroup);
     }
 }

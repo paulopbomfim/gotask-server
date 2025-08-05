@@ -14,6 +14,9 @@ public static class GetUserEndpoint
             .WithSummary("Endpoint para retornar o usuário definido.")
             .Produces<UserResponse>()
             .Produces<ErrorResponse>(
+                StatusCodes.Status401Unauthorized,
+                "application/problem+json")
+            .Produces<ErrorResponse>(
                 StatusCodes.Status404NotFound,
                 "application/problem+json");
     }

@@ -1,5 +1,4 @@
 ﻿using GoTask.Domain.Enums;
-using Riok.Mapperly.Abstractions;
 
 namespace GoTask.Domain.Entities;
 
@@ -18,6 +17,6 @@ public record User
     
     public Organization Organization { get; init; } = default!;
     
-    public DateTime CreatedAt { get; init; } = DateTime.Now;
+    public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
 }

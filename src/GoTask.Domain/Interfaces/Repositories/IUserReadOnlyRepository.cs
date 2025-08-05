@@ -8,5 +8,5 @@ public interface IUserReadOnlyRepository
     
     public Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken = default);
     
-    public Task<User?> GetUserByIdentifierAsync(Guid userIdentifier, CancellationToken cancellationToken = default);
+    public Task<User?> GetUserByIdentifierAsync(Guid userIdentifier, bool useTracking = false, CancellationToken cancellationToken = default);
 }

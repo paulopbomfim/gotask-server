@@ -18,4 +18,9 @@
       <ProjectReference Include="..\GoTask.Exceptions\GoTask.Exceptions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="UseCases\Organization\" />
+      <Folder Include="UseCases\Task\" />
+    </ItemGroup>
+
 </Project>

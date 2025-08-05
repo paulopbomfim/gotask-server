@@ -1,5 +1,6 @@
 ﻿using GoTask.Application.UseCases.Login;
 using GoTask.Application.UseCases.User;
+using GoTask.Application.UseCases.User.UpdateUser;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GoTask.Application;
@@ -19,6 +20,7 @@ public static class DependencyInjectionExtension
 
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IGetUserUseCase, GetUserUseCase>();
+        services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
 
         #endregion
     }

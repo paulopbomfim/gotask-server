@@ -4,5 +4,5 @@ namespace GoTask.Infrastructure.DataAccess;
 
 public class UnitOfWork(GoTaskDbContext dbContext) : IUnitOfWork
 {
-    public async Task Commit() => await dbContext.SaveChangesAsync();
+    public async Task<int> Commit(CancellationToken ct = default) => await dbContext.SaveChangesAsync(ct);
 }

@@ -1,6 +1,7 @@
 ﻿using GoTask.Domain.Entities;
 using GoTask.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace GoTask.Infrastructure.DataAccess.Repositories;
 
@@ -21,8 +22,17 @@ public class UserRepository(GoTaskDbContext dbContext) : IUserReadOnlyRepository
                 .FirstOrDefaultAsync(user => user.Email.Equals(email), cancellationToken);
         }
 
-        public async Task<User?> GetUserByIdentifierAsync(Guid userIdentifier, CancellationToken cancellationToken = default)
+        public async Task<User?> GetUserByIdentifierAsync(
+            Guid userIdentifier,
+            bool useTracking = false,
+            CancellationToken cancellationToken = default)
         {
+            if (!useTracking)
+            {
+                return await dbContext.Users
+                    .FirstOrDefaultAsync(user => user.UserIdentifier == userIdentifier, cancellationToken);
+            }
+            
             return await dbContext.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(user => user.UserIdentifier == userIdentifier, cancellationToken);
@@ -36,6 +46,11 @@ public class UserRepository(GoTaskDbContext dbContext) : IUserReadOnlyRepository
         {
             var result = await dbContext.Users.AddAsync(user, cancellationToken);
             return result.Entity;
+        }
+
+        public void UpdateUser(User userToUpdate)
+        {
+            dbContext.Users.Update(userToUpdate);
         }
 
     #endregion

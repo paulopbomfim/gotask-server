@@ -22,4 +22,15 @@ public static partial class UserMappingProfile
     [MapperIgnoreSource(nameof(User.UpdatedAt))]
     [MapperIgnoreSource(nameof(User.Password))]
     public static partial UserResponse ToResponse(this User user);
+
+        
+    
+    [MapperIgnoreTarget(nameof(User.Id))]
+    [MapperIgnoreTarget(nameof(User.UserIdentifier))]
+    [MapperIgnoreTarget(nameof(User.Organization))]
+    [MapperIgnoreTarget(nameof(User.CreatedAt))]
+    [MapperIgnoreTarget(nameof(User.Password))]
+    [MapperIgnoreTarget(nameof(User.UpdatedAt))]
+    [MapperIgnoreSource(nameof(request.Password))]
+    public static partial void ApplyUpdate([MappingTarget] this User user, UserRequest request);
 }
