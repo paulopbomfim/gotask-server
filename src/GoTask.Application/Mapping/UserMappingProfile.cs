@@ -22,7 +22,6 @@ public static partial class UserMappingProfile
     [MapperIgnoreSource(nameof(User.UpdatedAt))]
     [MapperIgnoreSource(nameof(User.Password))]
     public static partial UserResponse ToResponse(this User user);
-
         
     
     [MapperIgnoreTarget(nameof(User.Id))]

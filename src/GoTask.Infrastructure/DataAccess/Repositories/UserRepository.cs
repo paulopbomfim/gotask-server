@@ -27,7 +27,7 @@ public class UserRepository(GoTaskDbContext dbContext) : IUserReadOnlyRepository
             bool useTracking = false,
             CancellationToken cancellationToken = default)
         {
-            if (!useTracking)
+            if (useTracking)
             {
                 return await dbContext.Users
                     .FirstOrDefaultAsync(user => user.UserIdentifier == userIdentifier, cancellationToken);
