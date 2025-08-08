@@ -141,6 +141,15 @@ namespace GoTask.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuário não autorizado.
+        /// </summary>
+        public static string UNAUTHORIZED_ERROR {
+            get {
+                return ResourceManager.GetString("UNAUTHORIZED_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro desconhecido.
         /// </summary>
         public static string UNKNOWN_ERROR {

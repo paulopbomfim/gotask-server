@@ -48,4 +48,7 @@
     <data name="NOT_FOUND_ERROR" xml:space="preserve">
         <value>O item solicitado não foi encontrado no sistema.</value>
     </data>
+    <data name="UNAUTHORIZED_ERROR" xml:space="preserve">
+        <value>Usuário não autorizado</value>
+    </data>
 </root>
