@@ -25,7 +25,7 @@ public class RegisterUserUseCase(
         user.Password = passwordEncrypter.Encrypt(request.Password);
 
         var registeredUser = await userWriteOnlyRepository.RegisterUserAsync(user, cancellationToken);
-        await uow.Commit();
+        await uow.Commit(cancellationToken);
         
         var response = new RegisterUserResponse
         {

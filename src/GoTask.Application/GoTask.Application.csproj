@@ -19,7 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\Organization\" />
       <Folder Include="UseCases\Task\" />
     </ItemGroup>
 
