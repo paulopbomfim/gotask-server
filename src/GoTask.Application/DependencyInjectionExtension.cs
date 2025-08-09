@@ -1,4 +1,5 @@
-﻿using GoTask.Application.UseCases.Login;
+﻿using GoTask.Application.Services.User;
+using GoTask.Application.UseCases.Login;
 using GoTask.Application.UseCases.Organization.Register;
 using GoTask.Application.UseCases.User;
 using GoTask.Application.UseCases.User.UpdateUser;
@@ -30,6 +31,11 @@ public static class DependencyInjectionExtension
         services.AddScoped<IRegisterOrganizationUseCase, RegisterOrganizationUseCase>();
         
         #endregion
+    }
+    
+    private static void AddServices(IServiceCollection services)
+    {
+        services.AddScoped<IUserContextService, UserContextService>();
     }
 }
 
