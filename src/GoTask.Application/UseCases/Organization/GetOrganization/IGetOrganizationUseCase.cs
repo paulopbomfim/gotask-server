@@ -4,5 +4,5 @@ namespace GoTask.Application.UseCases.Organization.GetOrganization;
 
 public interface IGetOrganizationUseCase
 {
-    Task<OrganizationResponse> ExecuteAsync(long organizationId, CancellationToken ct);
+    Task<OrganizationResponse> ExecuteAsync(long organizationId, , CancellationToken ct);
 }
