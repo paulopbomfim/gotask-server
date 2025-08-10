@@ -1,6 +1,5 @@
 using GoTask.Application.Mapping;
 using GoTask.Application.Services.User;
-using GoTask.Communication.Enums;
 using GoTask.Communication.Responses;
 using GoTask.Domain.Interfaces.Repositories;
 using GoTask.Exceptions.ExceptionBase;
@@ -12,22 +11,21 @@ public class GetOrganizationUseCase(
     IUserReadOnlyRepository userRepository,
     IOrganizationReadOnlyRepository organizationRepository) : IGetOrganizationUseCase
 {
-    public async Task<OrganizationResponse> ExecuteAsync(Guid userIdentifier, long organizationId, CancellationToken ct)
+    public async Task<OrganizationResponse> ExecuteAsync(long organizationId, CancellationToken ct)
     {
+        var userId = userContext.UserIdentification;
+        var userIdentification = Guid.Parse(userContext.UserIdentification);
+        var loggedUser = await userRepository.GetUserByIdentifierAsync(userIdentification, cancellationToken: ct)
+            ?? throw new UnauthorizedException();
+        
         var organization = await organizationRepository.GetOrganizationByIdAsync(organizationId, ct)
             ?? throw new NotFoundException();
 
-        return organization.ToResponse();
-    }
-
-    private async Task ValidateAsync(Guid userIdentifier, CancellationToken ct)
-    {
-        var role = userContext.Role;
-        var loggedUser = await userRepository.GetUserByIdentifierAsync(userIdentifier, cancellationToken: ct);
-
-        if (role != nameof(OrganizationRole.Admin) || loggedUser is null)
+        if (loggedUser.OrganizationId != organization.Id)
         {
             throw new UnauthorizedException();
         }
+        
+        return organization.ToResponse();
     }
 }

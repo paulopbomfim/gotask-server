@@ -6,8 +6,9 @@ public class OrganizationBaseEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        var userGroup = app.MapGroup("/api/organization");
+        var organizationGroup = app.MapGroup("/api/organization");
         
-        RegisterOrganizationEndpoint.AddRoute(userGroup);
+        RegisterOrganizationEndpoint.AddRoute(organizationGroup);
+        GetOrganizationEndpoint.AddRoute(organizationGroup);
     }
 }
