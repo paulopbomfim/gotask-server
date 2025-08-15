@@ -18,7 +18,8 @@ services:
     networks:
       - backend
     depends_on:
-      - database
+      database:
+        condition: service_healthy
   
   database:
     container_name: GoTask.Database
@@ -34,6 +35,12 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - backend
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 20s
     <<: *env
 
 volumes:
