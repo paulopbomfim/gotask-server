@@ -1,3 +1,4 @@
+using GoTask.API.Middlewares;
 using GoTask.Application.UseCases.Organization.GetOrganization;
 using GoTask.Communication.Responses;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -13,10 +14,13 @@ public static class GetOrganizationEndpoint
 
     private static async Task<Ok<OrganizationResponse>> GetOrganizationEndpointAsync(
         long orgId,
+        HttpContext httpContext,
         IGetOrganizationUseCase useCase,
         CancellationToken cancellationToken)
     {
-        var result = await useCase.ExecuteAsync(orgId, cancellationToken);
+        var tokenInfo = TokenInfoMiddleware.GetUserContext(httpContext);
+        
+        var result = await useCase.ExecuteAsync(orgId, tokenInfo, cancellationToken);
         
         return TypedResults.Ok(result);
     }

@@ -1,6 +1,7 @@
 using System.Text;
 using Carter;
 using GoTask.API.Handlers;
+using GoTask.API.Middlewares;
 using GoTask.Application;
 using GoTask.Infrastructure.Extensions;
 using GoTask.Infrastructure.Migrations;
@@ -62,6 +63,8 @@ app.UseHttpsRedirection();
 
 if (!builder.Configuration.IsTestEnvironment())
     await MigrateDatabaseAsync();
+
+app.UseMiddleware<TokenInfoMiddleware>();
 
 app.Run();
 
