@@ -64,7 +64,7 @@ app.UseHttpsRedirection();
 if (!builder.Configuration.IsTestEnvironment())
     await MigrateDatabaseAsync();
 
-app.UseMiddleware<TokenInfoMiddleware>();
+app.UseMiddleware<UserClaimsMiddleware>();
 
 app.Run();
 

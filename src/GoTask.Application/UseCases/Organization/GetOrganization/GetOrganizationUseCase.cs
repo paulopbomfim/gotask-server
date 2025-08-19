@@ -11,21 +11,18 @@ public class GetOrganizationUseCase(
     IUserReadOnlyRepository userRepository,
     IOrganizationReadOnlyRepository organizationRepository) : IGetOrganizationUseCase
 {
-    public async Task<OrganizationResponse> ExecuteAsync(long organizationId, CancellationToken ct)
+    public async Task<OrganizationResponse> ExecuteAsync(long organizationId, string userIdentification, CancellationToken ct)
     {
-        var userId = userContext.UserIdentification;
-        var userIdentification = Guid.Parse(userContext.UserIdentification);
-        var loggedUser = await userRepository.GetUserByIdentifierAsync(userIdentification, cancellationToken: ct)
-            ?? throw new UnauthorizedException();
+       
+        var userGuid = Guid.Parse(userIdentification);
+        var loggedUser = await userRepository.GetUserByIdentifierAsync(userGuid, cancellationToken: ct)
+            ?? throw new NotFoundException();
         
-        var organization = await organizationRepository.GetOrganizationByIdAsync(organizationId, ct)
+        var organization = await organizationRepository.GetOrganizationWithUsersByIdAsync(organizationId, ct)
             ?? throw new NotFoundException();
 
-        if (loggedUser.OrganizationId != organization.Id)
-        {
-            throw new UnauthorizedException();
-        }
-        
-        return organization.ToResponse();
+        return loggedUser.OrganizationId == organization.Id 
+            ? organization.ToResponse()
+            : throw new UnauthorizedException();
     }
 }

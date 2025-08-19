@@ -9,6 +9,6 @@ public class OrganizationBaseEndpoint : ICarterModule
         var organizationGroup = app.MapGroup("/api/organization");
         
         RegisterOrganizationEndpoint.AddRoute(organizationGroup);
-        GetOrganizationEndpoint.AddRoute(organizationGroup);
+        GetOrganizationWithUsersEndpoint.AddRoute(organizationGroup);
     }
 }

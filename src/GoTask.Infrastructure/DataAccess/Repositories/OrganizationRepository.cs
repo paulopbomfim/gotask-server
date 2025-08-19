@@ -13,10 +13,15 @@ public class OrganizationRepository(GoTaskDbContext dbContext) : IOrganizationWr
         return result.Entity;
     }
     
-    public async Task<Organization?> GetOrganizationByIdAsync(long organizationId, CancellationToken cancellationToken = default)
+    public async Task<Organization?> GetOrganizationWithUsersByIdAsync(long organizationId, CancellationToken cancellationToken = default)
     {
-        return await dbContext.Organizations
+        var organizationQuery = dbContext.Organizations
             .AsNoTracking()
-            .FirstOrDefaultAsync(o => o.Id == organizationId, cancellationToken);
+            .AsSplitQuery()
+            .Include(o => o.Users);
+
+        return await organizationQuery
+            .SingleOrDefaultAsync(o => o.Id == organizationId, cancellationToken);
+
     }
 }
