@@ -12,7 +12,6 @@ public static partial class OrganizationMappingProfile
     [MapperIgnoreTarget(nameof(Organization.CreatedAt))]
     [MapperIgnoreTarget(nameof(Organization.UpdatedAt))]
     [MapperIgnoreTarget(nameof(Organization.Users))]
-    [MapperIgnoreSource(nameof(request.UserIdentifier))]
     public static partial Organization ToEntity(this OrganizationRequest request);
     
     [MapperIgnoreSource(nameof(Organization.CreatedAt))]
@@ -26,4 +25,10 @@ public static partial class OrganizationMappingProfile
     [MapperIgnoreSource(nameof(User.CreatedAt))]
     [MapperIgnoreSource(nameof(User.UpdatedAt))]
     private static partial OrganizationUsersResponse ToOrganizationUsersResponse(this User user);
+    
+    [MapperIgnoreTarget(nameof(Organization.Id))]
+    [MapperIgnoreTarget(nameof(Organization.Users))]
+    [MapperIgnoreTarget(nameof(Organization.CreatedAt))]
+    [MapperIgnoreTarget(nameof(Organization.UpdatedAt))]
+    public static partial void ApplyUpdate([MappingTarget] this Organization organization, OrganizationRequest request);
 }

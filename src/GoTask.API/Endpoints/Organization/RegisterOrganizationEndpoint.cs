@@ -1,3 +1,4 @@
+using GoTask.API.Middlewares;
 using GoTask.Application.UseCases.Organization.Register;
 using GoTask.Communication.Requests;
 using GoTask.Communication.Responses;
@@ -21,9 +22,12 @@ public static class RegisterOrganizationEndpoint
     private static async Task<Created<OrganizationResponse>> RegisterOrganizationEndpointAsync(
         OrganizationRequest request,
         IRegisterOrganizationUseCase useCase,
+        HttpContext httpContext,
         CancellationToken cancellationToken)
     {
-        var response = await useCase.ExecuteAsync(request, cancellationToken);
+        var claims = UserClaimsMiddleware.GetUserClaims(httpContext);
+        
+        var response = await useCase.ExecuteAsync(request, claims!.UserIdentification, cancellationToken);
         
         return TypedResults.Created($"/api/organization/{response.orgId}", response.organizationInfo);
     }

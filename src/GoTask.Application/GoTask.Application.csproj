@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\Organization\UpdateOrganization\" />
       <Folder Include="UseCases\Task\" />
     </ItemGroup>
 

@@ -2,6 +2,7 @@
 using GoTask.Application.UseCases.Login;
 using GoTask.Application.UseCases.Organization.GetOrganization;
 using GoTask.Application.UseCases.Organization.Register;
+using GoTask.Application.UseCases.Organization.UpdateOrganization;
 using GoTask.Application.UseCases.User;
 using GoTask.Application.UseCases.User.UpdateUser;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,7 @@ public static class DependencyInjectionExtension
         
         services.AddScoped<IRegisterOrganizationUseCase, RegisterOrganizationUseCase>();
         services.AddScoped<IGetOrganizationUseCase, GetOrganizationUseCase>();
+        services.AddScoped<IUpdateOrganizationUseCase, UpdateOrganizationUseCase>();
         
         #endregion
     }

@@ -10,5 +10,6 @@ public class OrganizationBaseEndpoint : ICarterModule
         
         RegisterOrganizationEndpoint.AddRoute(organizationGroup);
         GetOrganizationWithUsersEndpoint.AddRoute(organizationGroup);
+        UpdateOrganizationEndpoint.AddRoute(organizationGroup);
     }
 }

@@ -28,6 +28,7 @@ public static class GetOrganizationWithUsersEndpoint
         var claims = UserClaimsMiddleware.GetUserClaims(httpContext);
         
         var result = await useCase.ExecuteAsync(orgId, claims!.UserIdentification, cancellationToken);
+        
         return TypedResults.Ok(result);
     }
 }

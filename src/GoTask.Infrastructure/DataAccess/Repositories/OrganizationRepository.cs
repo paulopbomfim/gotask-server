@@ -6,13 +6,8 @@ namespace GoTask.Infrastructure.DataAccess.Repositories;
 
 public class OrganizationRepository(GoTaskDbContext dbContext) : IOrganizationWriteOnlyRepository, IOrganizationReadOnlyRepository
 {
-    public async Task<Organization> RegisterOrganizationAsync(Organization organization, CancellationToken cancellationToken = default)
-    {
-        var result = await dbContext.Organizations.AddAsync(organization, cancellationToken);
-        
-        return result.Entity;
-    }
-    
+
+    #region Read
     public async Task<Organization?> GetOrganizationWithUsersByIdAsync(long organizationId, CancellationToken cancellationToken = default)
     {
         var organizationQuery = dbContext.Organizations
@@ -24,4 +19,25 @@ public class OrganizationRepository(GoTaskDbContext dbContext) : IOrganizationWr
             .SingleOrDefaultAsync(o => o.Id == organizationId, cancellationToken);
 
     }
+
+    public async Task<Organization?> GetOrganizationByIdAsync(long organizationId, CancellationToken cancellationToken = default)
+    {
+        return await dbContext.Organizations
+            .SingleOrDefaultAsync(o => o.Id == organizationId, cancellationToken);
+    }
+    #endregion
+    
+    #region Write
+    public async Task<Organization> RegisterOrganizationAsync(Organization organization, CancellationToken cancellationToken = default)
+    {
+        var result = await dbContext.Organizations.AddAsync(organization, cancellationToken);
+        
+        return result.Entity;
+    }
+    
+    public void UpdateOrganization(Organization organizationToUpdate)
+    {
+        dbContext.Organizations.Update(organizationToUpdate);
+    }
+    #endregion
 }

@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using GoTask.Application.Mapping;
 using GoTask.Communication.Requests;
 using GoTask.Communication.Responses;
@@ -14,12 +13,16 @@ public class RegisterOrganizationUseCase(
     IUserReadOnlyRepository userReadOnlyRepository,
     IUnitOfWork uow) : IRegisterOrganizationUseCase
 {
-    public async Task<(long orgId, OrganizationResponse organizationInfo)> ExecuteAsync(OrganizationRequest request, CancellationToken ct)
+    public async Task<(long orgId, OrganizationResponse organizationInfo)> ExecuteAsync(
+        OrganizationRequest request,
+        string userIdentification,
+        CancellationToken ct)
     {
         Validator(request);
 
+        var userId = Guid.Parse(userIdentification);
         var newUserAdmin = await userReadOnlyRepository
-            .GetUserByIdentifierAsync(request.UserIdentifier, cancellationToken: ct)
+            .GetUserByIdentifierAsync(userId, cancellationToken: ct)
                 ?? throw new NotFoundException();
 
         var organizationMap = request.ToEntity();
@@ -40,7 +43,7 @@ public class RegisterOrganizationUseCase(
 
     private static void Validator(OrganizationRequest request)
     {
-        var validation = new RegisterOrganizationValidator().Validate(request);
+        var validation = new OrganizationValidator().Validate(request);
         
         if(validation.IsValid) return;
         

@@ -5,5 +5,8 @@ namespace GoTask.Application.UseCases.Organization.Register;
 
 public interface IRegisterOrganizationUseCase
 {
-    Task<(long orgId, OrganizationResponse organizationInfo)> ExecuteAsync(OrganizationRequest request, CancellationToken ct);
+    Task<(long orgId, OrganizationResponse organizationInfo)> ExecuteAsync(
+        OrganizationRequest request,
+        string userIdentification,
+        CancellationToken ct);
 }

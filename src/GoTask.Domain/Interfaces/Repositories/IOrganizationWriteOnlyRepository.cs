@@ -6,4 +6,6 @@ public interface IOrganizationWriteOnlyRepository
 {
     Task<Organization> RegisterOrganizationAsync(Organization organization,
         CancellationToken cancellationToken = default);
+    
+    void UpdateOrganization(Organization organizationToUpdate);
 }
