@@ -10,14 +10,11 @@ public class OrganizationRepository(GoTaskDbContext dbContext) : IOrganizationWr
     #region Read
     public async Task<Organization?> GetOrganizationWithUsersByIdAsync(long organizationId, CancellationToken cancellationToken = default)
     {
-        var organizationQuery = dbContext.Organizations
+        return await dbContext.Organizations
             .AsNoTracking()
             .AsSplitQuery()
-            .Include(o => o.Users);
-
-        return await organizationQuery
+            .Include(o => o.Users)
             .SingleOrDefaultAsync(o => o.Id == organizationId, cancellationToken);
-
     }
 
     public async Task<Organization?> GetOrganizationByIdAsync(long organizationId, CancellationToken cancellationToken = default)
