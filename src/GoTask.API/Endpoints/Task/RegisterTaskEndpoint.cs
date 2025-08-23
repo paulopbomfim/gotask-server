@@ -10,7 +10,13 @@ public static class RegisterTaskEndpoint
 {
     public static void AddRoute(RouteGroupBuilder group)
     {
-        group.MapPost("", RegisterTaskEndpointAsync);
+        group.MapPost("", RegisterTaskEndpointAsync)
+            .WithName("Create task endpoint")
+            .WithSummary("Endpoint para criar uma nova tarefa")
+            .Produces<Created<TaskResponse>>()
+            .Produces<ErrorResponse>(
+                StatusCodes.Status400BadRequest,
+                "application/problem+json");
     }
 
     private static async Task<Created<TaskResponse>> RegisterTaskEndpointAsync(
