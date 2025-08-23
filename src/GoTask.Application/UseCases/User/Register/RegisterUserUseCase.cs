@@ -36,7 +36,7 @@ public class RegisterUserUseCase(
         return (registeredUser.Id, response);
     }
 
-    private async Task ValidateAsync(UserRequest request, CancellationToken cancellationToken)
+    private async System.Threading.Tasks.Task ValidateAsync(UserRequest request, CancellationToken cancellationToken)
     {
         var validation = await new RegisterUserValidator().ValidateAsync(request, cancellationToken);
         

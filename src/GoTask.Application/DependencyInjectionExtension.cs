@@ -1,8 +1,8 @@
-﻿using GoTask.Application.Services.User;
-using GoTask.Application.UseCases.Login;
+﻿using GoTask.Application.UseCases.Login;
 using GoTask.Application.UseCases.Organization.GetOrganization;
 using GoTask.Application.UseCases.Organization.Register;
 using GoTask.Application.UseCases.Organization.UpdateOrganization;
+using GoTask.Application.UseCases.Task.Register;
 using GoTask.Application.UseCases.User;
 using GoTask.Application.UseCases.User.UpdateUser;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +14,6 @@ public static class DependencyInjectionExtension
     public static void AddApplication(this IServiceCollection services)
     {
         AddUseCases(services);
-        AddServices(services);
     }
 
     private static void AddUseCases(IServiceCollection services)
@@ -36,11 +35,12 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUpdateOrganizationUseCase, UpdateOrganizationUseCase>();
         
         #endregion
-    }
-    
-    private static void AddServices(IServiceCollection services)
-    {
-        services.AddScoped<IUserContextService, UserContextService>();
+        
+        #region Tasks
+        
+        services.AddScoped<IRegisterTaskUseCase, RegisterTaskUseCase>();
+        
+        #endregion
     }
 }
 

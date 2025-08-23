@@ -56,5 +56,12 @@ public static class DependencyInjectionExtension
             services.AddScoped<IOrganizationWriteOnlyRepository, OrganizationRepository>();
         
         #endregion
+
+        #region Tasks
+
+        services.AddScoped<ITasksReadOnlyRepository, TasksRepository>();
+        services.AddScoped<ITasksWriteOnlyRepository, TasksRepository>();
+
+        #endregion
     }
 }

@@ -4,7 +4,7 @@ namespace GoTask.Application.UseCases.Organization.UpdateOrganization;
 
 public interface IUpdateOrganizationUseCase
 {
-    Task ExecuteAsync(
+    System.Threading.Tasks.Task ExecuteAsync(
         long orgId,
         OrganizationRequest request,
         string userIdentification,

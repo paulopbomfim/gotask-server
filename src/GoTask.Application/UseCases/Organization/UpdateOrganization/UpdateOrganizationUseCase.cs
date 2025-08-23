@@ -12,7 +12,7 @@ public class UpdateOrganizationUseCase(
     IOrganizationWriteOnlyRepository organizationWriteOnlyRepository,
     IUnitOfWork uow) : IUpdateOrganizationUseCase
 {
-    public async Task ExecuteAsync(
+    public async System.Threading.Tasks.Task ExecuteAsync(
         long orgId,
         OrganizationRequest request,
         string userIdentification,

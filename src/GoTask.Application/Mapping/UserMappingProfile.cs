@@ -11,6 +11,7 @@ public static partial class UserMappingProfile
     [MapperIgnoreTarget(nameof(User.Id))]
     [MapperIgnoreTarget(nameof(User.UserIdentifier))]
     [MapperIgnoreTarget(nameof(User.Organization))]
+    [MapperIgnoreTarget(nameof(User.Tasks))]
     [MapperIgnoreTarget(nameof(User.CreatedAt))]
     [MapperIgnoreTarget(nameof(User.UpdatedAt))]
     public static partial User ToEntity(this UserRequest request);
@@ -21,6 +22,7 @@ public static partial class UserMappingProfile
     [MapperIgnoreSource(nameof(User.CreatedAt))]
     [MapperIgnoreSource(nameof(User.UpdatedAt))]
     [MapperIgnoreSource(nameof(User.Password))]
+    [MapperIgnoreSource(nameof(User.Tasks))]
     public static partial UserResponse ToResponse(this User user);
         
     

@@ -10,7 +10,7 @@ public class UpdateUserUseCase(
     IUserWriteOnlyRepository writeOnlyRepository,
     IUnitOfWork uow) : IUpdateUserUseCase
 {
-    public async Task ExecuteAsync(Guid userIdentifier, UserRequest request, CancellationToken cancellationToken)
+    public async System.Threading.Tasks.Task ExecuteAsync(Guid userIdentifier, UserRequest request, CancellationToken cancellationToken)
     {
         Validate(request);
 

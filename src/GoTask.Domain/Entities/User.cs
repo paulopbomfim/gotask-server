@@ -16,6 +16,7 @@ public record User
     public long? OrganizationId { get; set; }
     
     public Organization Organization { get; init; } = default!;
+    public List<TaskEntity> Tasks { get; init; } = [];
     
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }

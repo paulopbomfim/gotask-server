@@ -9,5 +9,5 @@ public record Organization
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? UpdatedAt { get; set; }
     
-    public List<User> Users { get; set; } = [];
+    public List<User> Users { get; init; } = [];
 }

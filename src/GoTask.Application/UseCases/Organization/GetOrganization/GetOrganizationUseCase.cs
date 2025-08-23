@@ -1,5 +1,4 @@
 using GoTask.Application.Mapping;
-using GoTask.Application.Services.User;
 using GoTask.Communication.Responses;
 using GoTask.Domain.Interfaces.Repositories;
 using GoTask.Exceptions.ExceptionBase;
@@ -7,7 +6,6 @@ using GoTask.Exceptions.ExceptionBase;
 namespace GoTask.Application.UseCases.Organization.GetOrganization;
 
 public class GetOrganizationUseCase(
-    IUserContextService userContext,
     IUserReadOnlyRepository userRepository,
     IOrganizationReadOnlyRepository organizationRepository) : IGetOrganizationUseCase
 {
