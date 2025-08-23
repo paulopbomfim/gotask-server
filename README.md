@@ -1,4 +1,4 @@
-# GoTask (Backend)
+# GoTask (Backend) - EM DESENVOLVIMENTO
 
 Este repositório contém a API do GoTask construída em .NET 9 (ASP.NET Core). Abaixo você encontra como iniciar o projeto rapidamente com Docker (recomendado) ou rodando localmente com o .NET SDK.
 
