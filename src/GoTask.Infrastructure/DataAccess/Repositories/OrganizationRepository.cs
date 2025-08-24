@@ -22,6 +22,32 @@ public class OrganizationRepository(GoTaskDbContext dbContext) : IOrganizationWr
         return await dbContext.Organizations
             .SingleOrDefaultAsync(o => o.Id == organizationId, cancellationToken);
     }
+
+    public async Task<Organization?> GetOrganizationTasksAsync(
+        long organizationId,
+        IList<long>? usersId,
+        CancellationToken cancellationToken = default)
+    {
+        var hasUserFilter = usersId is { Count: > 0 };
+
+        var query = dbContext.Organizations
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Where(o => o.Id == organizationId);
+
+        query = hasUserFilter
+            ? query
+                .Include(o => o.Users.Where(u => usersId!.Contains(u.Id)))
+                .ThenInclude(u => u.Tasks)
+            
+            : query
+                .Include(o => o.Users)
+                .ThenInclude(u => u.Tasks);
+
+        return await query.SingleOrDefaultAsync(cancellationToken);
+
+    }
+    
     #endregion
     
     #region Write

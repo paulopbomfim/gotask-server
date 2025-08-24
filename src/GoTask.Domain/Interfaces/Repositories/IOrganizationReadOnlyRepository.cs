@@ -6,4 +6,7 @@ public interface IOrganizationReadOnlyRepository
 {
     Task<Organization?> GetOrganizationWithUsersByIdAsync(long organizationId, CancellationToken cancellationToken = default);
     Task<Organization?> GetOrganizationByIdAsync(long organizationId, CancellationToken cancellationToken = default);
+
+    Task<Organization?> GetOrganizationTasksAsync(long organizationId, IList<long>? usersId,
+        CancellationToken cancellationToken = default);
 }

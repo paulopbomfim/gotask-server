@@ -16,6 +16,4 @@ public static partial class TaskMappingProfile
     public static partial TaskEntity ToEntity(this TaskRequest request);
     
     public static partial TaskResponse ToResponse(this TaskEntity task);
-    
-    private static partial TaskUserResponse ToTaskUserResponse(this User user);
 }      

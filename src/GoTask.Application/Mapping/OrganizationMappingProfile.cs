@@ -23,4 +23,10 @@ public static partial class OrganizationMappingProfile
     [MapperIgnoreTarget(nameof(Organization.CreatedAt))]
     [MapperIgnoreTarget(nameof(Organization.UpdatedAt))]
     public static partial void ApplyUpdate([MappingTarget] this Organization organization, OrganizationRequest request);
+    
+    public static partial OrganizationTasksResponse ToOrganizationTasksResponse(this TaskEntity task);
+
+    public static partial TaskUser ToTaskUser(this User user);
+    
+    public static partial UserOrganization ToUserOrganization(this Organization organization);
 }
