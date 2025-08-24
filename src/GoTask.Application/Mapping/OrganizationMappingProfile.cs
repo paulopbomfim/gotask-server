@@ -26,7 +26,9 @@ public static partial class OrganizationMappingProfile
     
     public static partial OrganizationTasksResponse ToOrganizationTasksResponse(this TaskEntity task);
 
-    public static partial TaskUser ToTaskUser(this User user);
+    private static partial TaskUser ToTaskUser(this User user);
     
     public static partial UserOrganization ToUserOrganization(this Organization organization);
+    
+    
 }

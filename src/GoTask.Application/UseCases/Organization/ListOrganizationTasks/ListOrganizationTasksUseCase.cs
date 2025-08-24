@@ -12,8 +12,11 @@ public class ListOrganizationTasksUseCase(
     {
         var organization = await organizationReadOnlyRepository.GetOrganizationTasksAsync(orgId, usersId, ct)
             ?? throw new NotFoundException();
-        //TODO: Arrumar mapeamento
-        var organizationTasks = organization.ToUserOrganization();
+        
+        var organizationTasks = organization.Users
+            .SelectMany(u => u.Tasks)
+            .Select(t => t.ToOrganizationTasksResponse())
+            .ToList();
         return organizationTasks;
     }
 }
