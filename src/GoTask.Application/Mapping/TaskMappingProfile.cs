@@ -16,4 +16,10 @@ public static partial class TaskMappingProfile
     public static partial TaskEntity ToEntity(this TaskRequest request);
     
     public static partial TaskResponse ToResponse(this TaskEntity task);
+    
+    public static partial IList<TasksResponse> ToTasksResponse(this IList<TaskEntity> tasks);
+
+    private static partial TasksUser ToTaskUser(this User user);
+    
+    private static partial UsersOrganization ToUserOrganization(this Organization organization);
 }      

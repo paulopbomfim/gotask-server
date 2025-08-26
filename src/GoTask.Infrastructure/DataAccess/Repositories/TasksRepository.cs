@@ -1,5 +1,6 @@
 using GoTask.Domain.Entities;
 using GoTask.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoTask.Infrastructure.DataAccess.Repositories;
 
@@ -7,9 +8,16 @@ public class TasksRepository(GoTaskDbContext dbContext) : ITasksReadOnlyReposito
 {
     #region Read
     
-    public Task GetTasksAsync()
+    public async Task<IList<TaskEntity>> GetTasksAsync(long orgId, long? userId, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext.Tasks
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Include(x => x.User)
+            .ThenInclude(x => x.Organization)
+            .Where(p => 
+                p.User.Organization.Id == orgId && (userId == null || userId == p.User.Id))
+            .ToListAsync(cancellationToken);
     }
 
     public Task GetTaskByIdAsync()
